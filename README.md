@@ -1,4 +1,4 @@
-# fluent-plugin-docker-tag-resolver
+# fluent-plugin-docker-tag-resolver [![Gem Version](https://badge.fury.io/rb/fluent-plugin-docker-tag-resolver.svg)](http://badge.fury.io/rb/fluent-plugin-docker-tag-resolver)
 
 ## Overview
 
