@@ -5,7 +5,7 @@
 This plugin finds the docker container name and its image name from container-id in record tag,
 and rewrite container-id to human-readable tag name.
 
-It's forcused on collecting docker container logs from `/var/lib/docker/containrs/*/*-json.log`.
+It's focused on collecting docker container logs from `/var/lib/docker/containrs/*/*-json.log`.
 
 For example, the plugin rewrites the tags like below:
 
