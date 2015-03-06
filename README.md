@@ -7,6 +7,23 @@ and rewrite container-id to human-readable tag name.
 
 It's forcused on collecting docker container logs from `/var/lib/docker/containrs/*/*-json.log`.
 
+For example, the plugin rewrites the tags like below:
+
+Before:
+
+```
+"docker.log.var.lib.docker.containers.695e035397f1d5c6cd88225dab54afaed170b93c3ebf51e4354c4daf796e6017.695e035397f1d5c6cd88225dab54afaed170b93c3ebf51e4354c4daf796e6017-json.log"
+```
+
+After:
+
+```
+#The tags represented with docker.container.#{image_name}.#{container_name}.#{container_id}
+
+docker.container.kubernetes/fluentd-gcp:1.0.backstabbing_yonath.695e035397f1d5c6cd88225dab54afaed170b93c3ebf51e4354c4daf796e6017
+```
+
+
 ## Installation
 
 Install with fluent-gem command as:
