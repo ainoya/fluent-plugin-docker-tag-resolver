@@ -30,7 +30,7 @@ Install with fluent-gem command as:
 
 ```
 # for google-fluentd
-$ /opt/google-fluentd/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-docker-tag-resolver-0.1.0# /opt/google-fluentd/embedded/bin/gem install 
+$ /opt/google-fluentd/embedded/bin/gem install fluent-plugin-docker-tag-resolver
 ```
 
 ## Configuration
@@ -66,6 +66,37 @@ $ /opt/google-fluentd/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-docker-tag
 2015-03-06 08:09:34 +0000 docker.container.kubernetes/fluentd-gcp:1.0.backstabbing_yonath.695e035397f1d5c6cd88225dab54afaed170b93c3ebf51e4354c4daf796e6017: {"message":"{\"log\":\"\\u001b(B\\u001b[m  355 root      20   0    4388    680    604 S   0.0  0.0   0:00.01 tail                                                                            \\u001b(B\\u001b[m\\u001b[39;49m\\u001b[K\\r\\n\",\"stream\":\"stdout\",\"time\":\"2015-03-06T08:09:34.980863575Z\"}"}
 2015-03-06 08:09:34 +0000 docker.container.kubernetes/fluentd-gcp:1.0.backstabbing_yonath.695e035397f1d5c6cd88225dab54afaed170b93c3ebf51e4354c4daf796e6017: {"message":"{\"log\":\"\\u001b(B\\u001b[m\\u001b[1m  356 root      20   0   19872   2516   2176 R   0.0  0.1   0:00.01 top                                                                             \\u001b(B\\u001b[m\\u001b[39;49m\\u001b[K\\r\\n\",\"stream\":\"stdout\",\"time\":\"2015-03-06T08:09:34.980863575Z\"}"}
 2015-03-06 08:09:37 +0000 docker.container.kubernetes/fluentd-gcp:1.0.backstabbing_yonath.695e035397f1d5c6cd88225dab54afaed170b93c3ebf51e4354c4daf796e6017: {"message":"{\"log\":\"\\u001b[J\\u001b[?1l\\u001b\\u003e\\u001b[31;1H\\r\\n\",\"stream\":\"stdout\",\"time\":\"2015-03-06T08:09:37.507569483Z\"}"}
+```
+
+## Use case
+
+Here, the configuration to collect all docker logs inside the kubernetes world with fluentd.
+
+### Build google-fluentd image includes `fluent-plugin-docker-tag-resolver`
+
+```
+cd docker
+make build
+```
+
+### Fleet service definition
+
+```
+[Unit]
+Description=Google-Fluentd Agent Service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill td-agent
+ExecStartPre=-/usr/bin/docker rm td-agent
+ExecStartPre=-/usr/bin/docker pull registry.yourprivate.jp/fluentd-gcp:1.0
+ExecStart=/usr/bin/bash -c \
+"/usr/bin/docker run --privileged --name td-agent \
+-v /var/lib/docker:/var/lib/docker -v /var/run/docker.sock:/var/run/docker.sock \
+registry.yourprivate.jp/fluentd-gcp:1.0"
+
+[X-Fleet]
+Global=true
 ```
 
 ## Reference

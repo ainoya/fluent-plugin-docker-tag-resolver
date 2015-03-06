@@ -18,6 +18,8 @@ RUN apt-get -q update && \
     apt-get clean && \
     curl -s https://storage.googleapis.com/signals-agents/logging/google-fluentd-install.sh | sudo bash
 
+RUN /opt/google-fluentd/embedded/bin/gem install fluent-plugin-docker-tag-resolver
+
 # Copy the Fluentd configuration file for logging Docker container logs.
 COPY google-fluentd.conf /etc/google-fluentd/google-fluentd.conf
 
