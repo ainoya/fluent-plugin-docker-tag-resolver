@@ -8,9 +8,9 @@ Gem::Specification.new do |s|
   s.authors     = ["Naoki AINOYA"]
   s.email       = ["ainonic@gmail.com"]
   s.homepage    = "https://github.com/ainoya/fluent-plugin-docker-tag-resolver"
-  s.summary     = %q{Fluentd Output filter plugin.}
+  s.summary     = %q{Fluentd output plugin to resolve container name from docker container-id in record tags.}
 
-  s.files         = `git ls-files`.split("\n")
+  s.files         = `git ls-files`.split("\n").reject{|f| f =~ /^docker\//}
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
