@@ -2,6 +2,11 @@
 
 ## Overview
 
+This plugin finds the docker container name and its image name from container-id in record tag,
+and rewrite container-id to human-readable tag name.
+
+It's forcused on collecting docker container logs from `/var/lib/docker/containrs/*/*-json.log`.
+
 ## Installation
 
 Install with fluent-gem command as:
@@ -15,7 +20,6 @@ $ /opt/google-fluentd/embedded/lib/ruby/gems/2.1.0/gems/fluent-plugin-docker-tag
 
 ### Usage
 
-It's a sample to exclude some static file log before split tag by domain.
 
 ```
 <source>
