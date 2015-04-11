@@ -49,7 +49,7 @@ class Fluent::DockerTagResolverOutput < Fluent::Output
 
     container_name.sub!(/^\//, '')
     container_name.tr!('.','_')
-		image_name.tr!('.','_')
+    image_name.tr!('.','_')
 
     rewrited_tag = "docker.container.%s.%s.%s" % [image_name, container_name, container_id]
     return rewrited_tag
