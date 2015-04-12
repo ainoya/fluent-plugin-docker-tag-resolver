@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "fluent-plugin-docker-tag-resolver"
-  s.version     = "0.1.1"
+  s.version     = "0.2.0"
   s.license     = "Apache 2.0"
   s.authors     = ["Naoki AINOYA"]
   s.email       = ["ainonic@gmail.com"]
